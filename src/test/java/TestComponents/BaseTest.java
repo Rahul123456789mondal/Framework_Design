@@ -22,11 +22,16 @@ public class BaseTest {
     public WebDriver initilizeDriver() throws IOException {
 
         // Load properties file
-        loadProperties();
+        //loadProperties();
 
         // Get browser from system property or properties file
-        String browserName = prop.getProperty("browser");
-        createDriver(browserName);
+        String browserName = config.getProperty("browser");
+        if (browserName !=  null){
+            createDriver(browserName);
+        }else {
+            throw new RuntimeException("Please Pass The BrowserValue");
+        }
+
         return driver;
     }
 
@@ -47,14 +52,14 @@ public class BaseTest {
 
 
     // Load properties file
-    private void loadProperties() throws IOException {
+    /*private void loadProperties() throws IOException {
         prop = new Properties();
         FileInputStream file = null;
         try {
             String propertiesPath = System.getProperty("user.dir") + "\\src\\main\\java\\resourse\\globalData.properties";
             file = new FileInputStream(propertiesPath);
             prop.load(file);
-            log.info("Properties file loaded successfully from: " + propertiesPath);
+            log.info("Properties file loaded successfully from: {}", propertiesPath);
         } catch (IOException e) {
             log.error("Error loading properties file: ", e);
             throw e;
@@ -67,7 +72,7 @@ public class BaseTest {
                 }
             }
         }
-    }
+    } */
 
     private void createDriver(String browserName) {
 

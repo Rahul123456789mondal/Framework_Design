@@ -20,8 +20,8 @@ public class CheckOutPage extends AbstractComponent {
     }
 
     // Country Selection Fields
-    @FindBy(css = "[placeholder='Select Country']")
-    WebElement countryInput;
+    @FindBy(xpath = "//input[@placeholder='Select Country']")
+    private WebElement countryInput;
 
     @FindBy(css = ".ta-results")
     WebElement countryDropdown;
@@ -36,6 +36,16 @@ public class CheckOutPage extends AbstractComponent {
     @FindBy(css = ".action__submit")
     WebElement submitBtn;
 
+
+
+    public void selectCountry(String countryName){
+        countryInput.click();
+        countryInput.sendKeys(countryName);
+
+    }
+
+
+    /*
     // Methods for Country Selection
     public void selectCountry(String countryName) {
         countryInput.click();
@@ -78,6 +88,6 @@ public class CheckOutPage extends AbstractComponent {
         selectIndia();
         submitOrder();
     }
-
+    */
 
 }

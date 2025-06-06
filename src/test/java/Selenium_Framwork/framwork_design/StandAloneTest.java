@@ -4,6 +4,7 @@ import PageObject.CheckOutPage;
 import PageObject.LandingPage;
 import PageObject.ProductList;
 import TestComponents.BaseTest;
+import TestComponents.config;
 import org.testng.annotations.Test;
 
 public class StandAloneTest extends BaseTest {
@@ -18,7 +19,8 @@ public class StandAloneTest extends BaseTest {
 		listProduct.goToCart();
 		listProduct.proceedToCheckout();
 		CheckOutPage checkoutPage = new CheckOutPage(driver);
-		checkoutPage.completeCheckoutWithIndia();
+		String countryName = config.getProperty("Country");
+		checkoutPage.selectCountry(countryName);
 	}
 
 }
