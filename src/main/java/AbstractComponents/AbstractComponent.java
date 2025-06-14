@@ -14,6 +14,7 @@ public class AbstractComponent {
     public AbstractComponent(WebDriver driver) {
         this.driver = driver;
     }
+
     // Wait for element to appear
     public void waitForElementToAppear(By findBy) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -1,7 +1,6 @@
 package PageObject;
 
 import AbstractComponents.AbstractComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,14 +33,19 @@ public class CheckOutPage extends AbstractComponent {
 
     // Action Buttons
     @FindBy(css = ".action__submit")
-    WebElement submitBtn;
+    private WebElement submitBtn;
 
 
 
     public void selectCountry(String countryName){
         countryInput.click();
         countryInput.sendKeys(countryName);
+    }
 
+    // Method to submit the order
+    public void submitOrder() {
+        waitForElementToBeClickable(submitBtn);
+        submitBtn.click();
     }
 
 
@@ -70,11 +74,7 @@ public class CheckOutPage extends AbstractComponent {
         indiaOption.click();
     }
 
-    // Method to submit the order
-    public void submitOrder() {
-        waitForElementToBeClickable(submitBtn);
-        submitBtn.click();
-    }
+
 
 
     // Method for complete checkout flow

@@ -1,5 +1,6 @@
 package TestComponents;
 
+import BaseConfig.config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,19 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 import java.time.Duration;
 public class BaseTest {
 
-    public Logger log = LoggerFactory.getLogger(BaseTest.class);
     public WebDriver driver;
-    public Properties prop;
     public WebDriver initilizeDriver() throws IOException {
-
-        // Load properties file
-        //loadProperties();
 
         // Get browser from system property or properties file
         String browserName = config.getProperty("browser");
@@ -39,7 +35,7 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void runBrowser() throws IOException {
         driver = initilizeDriver();
-        driver.get(prop.getProperty("url"));
+        driver.get(Objects.requireNonNull(config.getProperty("url")));
     }
 
     @AfterMethod

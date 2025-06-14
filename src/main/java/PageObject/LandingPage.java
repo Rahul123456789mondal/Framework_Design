@@ -29,10 +29,6 @@ public class LandingPage extends AbstractComponent {
     @FindBy(id = "login")
     private WebElement loginButton;
 
-    // Error message element
-    @FindBy(css = "[class*='flyInOut']")
-    WebElement errorMessage;
-
     // Actions
     public void enterEmail(String email) {
         emailInput.sendKeys(email);
@@ -54,15 +50,4 @@ public class LandingPage extends AbstractComponent {
         // Wait for products to load (this ensures login was successful)
         waitForElementToAppear(By.cssSelector(".mb-3"));
     }
-    // Get error message (in case of failed login)
-    public String getErrorMessage() {
-        //waitForElementToAppear(errorMessage);
-        return errorMessage.getText();
-    }
 }
-
-
-/* driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys("arkatest@test.com");
-		driver.findElement(By.xpath("//input[@id='userPassword']")).sendKeys("Test@123");
-		driver.findElement(By.id("login")).click();
-*/

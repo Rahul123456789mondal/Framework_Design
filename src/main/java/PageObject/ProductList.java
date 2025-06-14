@@ -30,8 +30,6 @@ public class ProductList extends AbstractComponent {
     By productNameBy = By.cssSelector("b");
     By addToCartButton = By.xpath(".//button[contains(text(),'Add To Cart')]");
     By toastMessage = By.cssSelector("#toast-container");
-    By cartButton = By.cssSelector("[routerlink*='cart']");
-    By checkoutButton = By.xpath("//button[contains(text(),'Checkout')]");
 
     // Get a specific product by name
     public WebElement getProductByName(String productName) {
@@ -95,25 +93,6 @@ public class ProductList extends AbstractComponent {
         }
     }
 
-    // Go to cart page
-    public void goToCart() {
-        try {
-            WebElement cart = driver.findElement(cartButton);
-            //((JavascriptExecutor) driver).executeScript("arguments[0].click();", cart);
-            cart.click();
-        } catch (Exception e) {
-            System.out.println("Failed to navigate to cart: " + e.getMessage());
-        }
-    }
 
-    // Proceed to checkout
-    public void proceedToCheckout() {
-        try {
-            waitForElementToBeClickable(checkoutButton);
-            WebElement checkout = driver.findElement(checkoutButton);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkout);
-        } catch (Exception e) {
-            System.out.println("Failed to click checkout: " + e.getMessage());
-        }
-    }
+
 }

@@ -1,4 +1,4 @@
-package TestComponents;
+package BaseConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,6 @@ public class config {
 
     // Get property value by key
     public static String getProperty(String key) {
-        boolean isLoaded = false;
         try {
             loadProperties();
         } catch (IOException e) {
@@ -49,6 +48,5 @@ public class config {
         }
         return value;
     }
-
 
 }

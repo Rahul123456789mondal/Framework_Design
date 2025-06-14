@@ -1,10 +1,12 @@
 package Selenium_Framwork.framwork_design;
 
+import PageObject.CartPage;
 import PageObject.CheckOutPage;
 import PageObject.LandingPage;
 import PageObject.ProductList;
 import TestComponents.BaseTest;
-import TestComponents.config;
+import BaseConfig.config;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class StandAloneTest extends BaseTest {
@@ -16,11 +18,14 @@ public class StandAloneTest extends BaseTest {
 		ProductList listProduct = new ProductList(driver);
 		String product_name = "IPHONE 13 PRO";
 		listProduct.addProductToCart(product_name);
-		listProduct.goToCart();
-		listProduct.proceedToCheckout();
+		CartPage cartPage = new CartPage(driver);
+		cartPage.goToCart();
+		Assert.assertTrue(cartPage.verifyProductName(product_name), "Product Matched");
+		cartPage.proceedToCheckout();
 		CheckOutPage checkoutPage = new CheckOutPage(driver);
 		String countryName = config.getProperty("Country");
 		checkoutPage.selectCountry(countryName);
+		checkoutPage.submitOrder();
 	}
 
 }
