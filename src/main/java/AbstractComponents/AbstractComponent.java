@@ -9,40 +9,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class AbstractComponent {
-    WebDriver driver;
-
-    public AbstractComponent(WebDriver driver) {
-        this.driver = driver;
-    }
 
     // Wait for element to appear
-    public void waitForElementToAppear(By findBy) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public static void waitForElementToAppear(By findBy, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
     }
 
     // Wait for element to disappear
-    public void waitForElementToDisappear(By findBy) {
+    public static void waitForElementToDisappear(By findBy, WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(findBy));
     }
 
-    // Wait for element to be clickable
-    public void waitForElementToBeClickable(By findBy) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(findBy));
-    }
-
     // Wait for element to be clickable (WebElement version)
-    public void waitForElementToBeClickable(WebElement element) {
+    public static void waitForElementToBeClickable(WebElement element, WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     // Legacy method for backward compatibility
-    public void waitForAppear(By findBy) {
+    /*public void waitForAppear(By findBy) {
         waitForElementToAppear(findBy);
-    }
+    }*/
+
+    // Wait for element to be clickable
+    /*public void waitForElementToBeClickable(By findBy, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(findBy));
+    }*/
 
 
 }

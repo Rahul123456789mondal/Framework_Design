@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage extends AbstractComponent {
+public class LandingPage {
 
-    WebDriver driver;
+    public WebDriver driver;
 
     // Constructor: initializes PageFactory elements
     public LandingPage(WebDriver driver) {
-        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -30,24 +29,28 @@ public class LandingPage extends AbstractComponent {
     private WebElement loginButton;
 
     // Actions
-    public void enterEmail(String email) {
+    public LandingPage enterEmail(String email) {
         emailInput.sendKeys(email);
+        return this;
     }
 
-    public void enterPassword(String password) {
+    public LandingPage enterPassword(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLogin() {
+    public LandingPage clickLogin() {
         loginButton.click();
+        return this;
     }
 
     // Combined action for login
-    public void login(String email, String password) {
+    public ProductList login(String email, String password) {
         enterEmail(email);
         enterPassword(password);
         clickLogin();
         // Wait for products to load (this ensures login was successful)
-        waitForElementToAppear(By.cssSelector(".mb-3"));
+        AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
+        return new ProductList(driver);
     }
 }

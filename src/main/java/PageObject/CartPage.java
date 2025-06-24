@@ -6,12 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartPage extends AbstractComponent {
+public class CartPage {
 
     WebDriver driver;
 
     public CartPage (WebDriver driver){
-        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -29,7 +28,7 @@ public class CartPage extends AbstractComponent {
 
 
     // Go to cart page
-    public void goToCart() {
+    public CartPage goToCart() {
         try {
             // Debug: Check if element is found
             if (cartButton == null) {
@@ -41,21 +40,25 @@ public class CartPage extends AbstractComponent {
         } catch (Exception e) {
             System.out.println("Failed to navigate to cart: " + e.getMessage());
         }
+        return this;
+    }
+
+
+    public boolean verifyProductName(String productName){
+        return verifyProductName.getText().equalsIgnoreCase(productName);
     }
 
     // Proceed to checkout
-    public void proceedToCheckout() {
+    public CheckOutPage proceedToCheckout() {
         try {
-            waitForElementToBeClickable(checkoutButton);
+            AbstractComponent.waitForElementToBeClickable(checkoutButton, driver);
             checkoutButton.click();
             //((JavascriptExecutor) driver).executeScript("button click()", checkoutButton);
         } catch (Exception e) {
             System.out.println("Failed to click checkout: " + e.getMessage());
         }
-    }
 
-    public boolean verifyProductName(String productName){
-        return verifyProductName.getText().equalsIgnoreCase(productName);
+        return new CheckOutPage(driver);
     }
 
 }

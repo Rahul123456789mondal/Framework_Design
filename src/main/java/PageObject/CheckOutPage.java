@@ -1,19 +1,22 @@
 package PageObject;
 
 import AbstractComponents.AbstractComponent;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import javax.swing.*;
 import java.util.List;
 
-public class CheckOutPage extends AbstractComponent {
+public class CheckOutPage {
 
     WebDriver driver;
 
     public CheckOutPage(WebDriver driver) {
-        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -32,20 +35,54 @@ public class CheckOutPage extends AbstractComponent {
     WebElement indiaOption;
 
     // Action Buttons
-    @FindBy(css = ".action__submit")
+    @FindBy(xpath = "//a[normalize-space()='Place Order']")
     private WebElement submitBtn;
 
 
 
-    public void selectCountry(String countryName){
+    public CheckOutPage selectCountry(String countryName){
         countryInput.click();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         countryInput.sendKeys(countryName);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ENTER);
+        Actions action = new Actions(driver);
+        action.contextClick().build().perform();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", submitBtn);
+        return this;
     }
 
     // Method to submit the order
-    public void submitOrder() {
-        waitForElementToBeClickable(submitBtn);
+    public CheckOutPage submitOrder() {
+        AbstractComponent.waitForElementToBeClickable(submitBtn, driver);
         submitBtn.click();
+        return this;
     }
 
 

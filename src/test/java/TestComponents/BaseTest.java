@@ -18,6 +18,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public WebDriver driver;
+
     public WebDriver initilizeDriver() throws IOException {
 
         // Get browser from system property or properties file

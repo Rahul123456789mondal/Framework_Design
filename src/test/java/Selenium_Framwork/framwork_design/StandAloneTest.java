@@ -11,18 +11,24 @@ import org.testng.annotations.Test;
 
 public class StandAloneTest extends BaseTest {
 
+	LandingPage landingPage ;
+	ProductList productList ;
+	CartPage cartPage ;
+	CheckOutPage checkoutPage;
+
 	@Test
 	public void standAloneTest() {
-		LandingPage landingPage = new LandingPage(driver);
-		landingPage.login("arkatest@test.com","Test@123" );
-		ProductList listProduct = new ProductList(driver);
+
+		landingPage = new LandingPage(driver);
+		productList = landingPage.login("arkatest@test.com","Test@123" );
+
 		String product_name = "IPHONE 13 PRO";
-		listProduct.addProductToCart(product_name);
-		CartPage cartPage = new CartPage(driver);
+		cartPage = productList.addProductToCart(product_name);
+
 		cartPage.goToCart();
 		Assert.assertTrue(cartPage.verifyProductName(product_name), "Product Matched");
-		cartPage.proceedToCheckout();
-		CheckOutPage checkoutPage = new CheckOutPage(driver);
+		checkoutPage = cartPage.proceedToCheckout();
+
 		String countryName = config.getProperty("Country");
 		checkoutPage.selectCountry(countryName);
 		checkoutPage.submitOrder();

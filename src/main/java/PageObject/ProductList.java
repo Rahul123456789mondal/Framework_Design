@@ -10,12 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductList extends AbstractComponent {
+public class ProductList {
 
     WebDriver driver;
 
     public ProductList(WebDriver driver) {
-        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -33,7 +32,7 @@ public class ProductList extends AbstractComponent {
 
     // Get a specific product by name
     public WebElement getProductByName(String productName) {
-        waitForElementToAppear(productBy);
+        AbstractComponent.waitForElementToAppear(productBy, driver);
 
         return products.stream()
                 .filter(product -> {
@@ -49,7 +48,7 @@ public class ProductList extends AbstractComponent {
     }
 
     // Method to add a product to cart
-    public void addProductToCart(String productName) {
+    public CartPage addProductToCart(String productName) {
         WebElement productElement = getProductByName(productName);
 
         if (productElement != null) {
@@ -60,8 +59,8 @@ public class ProductList extends AbstractComponent {
                 js.executeScript("arguments[0].click();", addToCartBtn);
 
                 // Wait for toast notification to appear and then disappear
-                waitForElementToAppear(toastMessage);
-                waitForElementToDisappear(toastMessage);
+                AbstractComponent.waitForElementToAppear(toastMessage, driver);
+                AbstractComponent.waitForElementToDisappear(toastMessage, driver);
 
                 System.out.println("Added " + productName + " to cart successfully");
             } catch (Exception e) {
@@ -72,25 +71,27 @@ public class ProductList extends AbstractComponent {
 
             // If product not found by name, click the first product's details
             try {
-                waitForElementToAppear(productBy);
+                AbstractComponent.waitForElementToAppear(productBy, driver);
                 WebElement firstProduct = products.get(0);
                 firstProduct.click();
 
                 // On product details page, click Add To Cart
                 By detailsAddToCartBtn = By.xpath("//button[contains(text(),'Add To Cart')]");
-                waitForElementToBeClickable(detailsAddToCartBtn);
+                AbstractComponent.waitForElementToBeClickable((WebElement) detailsAddToCartBtn, driver);
                 WebElement addBtn = driver.findElement(detailsAddToCartBtn);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addBtn);
 
                 // Wait for toast notification
-                waitForElementToAppear(toastMessage);
-                waitForElementToDisappear(toastMessage);
+                AbstractComponent.waitForElementToAppear(toastMessage, driver);
+                AbstractComponent.waitForElementToDisappear(toastMessage, driver);
 
                 System.out.println("Added product from details page to cart successfully");
             } catch (Exception e) {
                 System.out.println("Failed to add product from details page: " + e.getMessage());
             }
         }
+
+        return new CartPage(driver);
     }
 
 
