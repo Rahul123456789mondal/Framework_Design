@@ -6,20 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Properties;
 import java.time.Duration;
 public class BaseTest {
 
     public WebDriver driver;
 
-    public WebDriver initilizeDriver() throws IOException {
+    public WebDriver initilizeDriver() {
 
         // Get browser from system property or properties file
         String browserName = config.getProperty("browser");
@@ -28,7 +24,6 @@ public class BaseTest {
         }else {
             throw new RuntimeException("Please Pass The BrowserValue");
         }
-
         return driver;
     }
 
@@ -46,30 +41,6 @@ public class BaseTest {
             driver = null; // Set to null to avoid memory leaks
         }
     }
-
-
-    // Load properties file
-    /*private void loadProperties() throws IOException {
-        prop = new Properties();
-        FileInputStream file = null;
-        try {
-            String propertiesPath = System.getProperty("user.dir") + "\\src\\main\\java\\resourse\\globalData.properties";
-            file = new FileInputStream(propertiesPath);
-            prop.load(file);
-            log.info("Properties file loaded successfully from: {}", propertiesPath);
-        } catch (IOException e) {
-            log.error("Error loading properties file: ", e);
-            throw e;
-        } finally {
-            if (file != null) {
-                try {
-                    file.close();
-                } catch (IOException e) {
-                    log.error("Error closing properties file: ", e);
-                }
-            }
-        }
-    } */
 
     private void createDriver(String browserName) {
 
@@ -96,5 +67,27 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-
 }
+
+// Load properties file
+    /*private void loadProperties() throws IOException {
+        prop = new Properties();
+        FileInputStream file = null;
+        try {
+            String propertiesPath = System.getProperty("user.dir") + "\\src\\main\\java\\resourse\\globalData.properties";
+            file = new FileInputStream(propertiesPath);
+            prop.load(file);
+            log.info("Properties file loaded successfully from: {}", propertiesPath);
+        } catch (IOException e) {
+            log.error("Error loading properties file: ", e);
+            throw e;
+        } finally {
+            if (file != null) {
+                try {
+                    file.close();
+                } catch (IOException e) {
+                    log.error("Error closing properties file: ", e);
+                }
+            }
+        }
+    } */

@@ -1,9 +1,6 @@
 package Selenium_Framwork.framwork_design;
 
-import PageObject.CartPage;
-import PageObject.CheckOutPage;
-import PageObject.LandingPage;
-import PageObject.ProductList;
+import PageObject.*;
 import TestComponents.BaseTest;
 import BaseConfig.config;
 import org.testng.Assert;
@@ -15,6 +12,7 @@ public class StandAloneTest extends BaseTest {
 	ProductList productList ;
 	CartPage cartPage ;
 	CheckOutPage checkoutPage;
+	ConfirmationPage confirmationPage;
 
 	@Test
 	public void standAloneTest() {
@@ -31,7 +29,11 @@ public class StandAloneTest extends BaseTest {
 
 		String countryName = config.getProperty("Country");
 		checkoutPage.selectCountry(countryName);
-		checkoutPage.submitOrder();
+		confirmationPage = checkoutPage.submitOrder();
+
+		String confirmMessage = confirmationPage.getConfirmMessage();
+		Assert.assertTrue(confirmMessage.toLowerCase().equalsIgnoreCase("Thankyou for the order."));
+
 	}
 
 }
