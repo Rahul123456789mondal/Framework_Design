@@ -17,6 +17,13 @@ public class StandAloneTest extends BaseTest {
 	@Test
 	public void standAloneTest() {
 
+		// Add null check for driver
+		if (driver == null) {
+			throw new RuntimeException("Driver is not initialized. Check BaseTest configuration.");
+		}
+
+		System.out.println("Driver initialized successfully: " + driver);
+
 		landingPage = new LandingPage(driver);
 		productList = landingPage.login("arkatest@test.com","Test@123" );
 

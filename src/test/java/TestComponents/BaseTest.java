@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import java.io.IOException;
 import java.util.Objects;
 import java.time.Duration;
+
 public class BaseTest {
 
     public WebDriver driver;
@@ -19,7 +20,7 @@ public class BaseTest {
 
         // Get browser from system property or properties file
         String browserName = config.getProperty("browser");
-        if (browserName !=  null){
+        if (browserName != null){
             createDriver(browserName);
         }else {
             throw new RuntimeException("Please Pass The BrowserValue");
@@ -44,7 +45,7 @@ public class BaseTest {
 
     private void createDriver(String browserName) {
 
-        switch (browserName) {
+        switch (browserName.toLowerCase()) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -63,7 +64,7 @@ public class BaseTest {
             default:
                 throw new RuntimeException("Browser not supported: " + browserName);
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
