@@ -53,4 +53,12 @@ public class LandingPage {
         AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
         return new ProductList(driver);
     }
+
+    By errorPopup = By.xpath("//div[@id='toast-container']//div[@role='alert']");
+    public String getErrorMessage(){
+        WebElement popup = driver.findElement(errorPopup);
+        return popup.getText();
+    }
+
+
 }
