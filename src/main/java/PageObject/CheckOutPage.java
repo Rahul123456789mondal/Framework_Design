@@ -53,7 +53,6 @@ public class CheckOutPage {
                     // Click the option
                     country.click();
                     System.out.println("Selected country: " + countryText);
-                    return;
                 }
             }
         } catch (Exception e) {
@@ -67,12 +66,12 @@ public class CheckOutPage {
     public ConfirmationPage submitOrder() {
         WebElement submitButton = driver.findElement(submitBtn);
         try {
-            // Scroll to submit button
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
+            // Scroll to submit button - arguments[0].scrollIntoView({block: 'center'});
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
 
             // Add delay for page stability
             Thread.sleep(1000);
-            AbstractComponent.waitForElementToBeClickable( submitButton, driver);
+            AbstractComponent.waitForElementToBeClickable(submitButton, driver);
             submitButton.click();
             return new ConfirmationPage(driver);
         }

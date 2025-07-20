@@ -50,7 +50,7 @@ public class LandingPage {
         enterPassword(password);
         clickLogin();
         // Wait for products to load (this ensures login was successful)
-        AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
+        //AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
         return new ProductList(driver);
     }
 

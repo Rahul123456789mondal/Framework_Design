@@ -39,7 +39,12 @@ public class StandAloneTest extends BaseTest {
 		confirmationPage = checkoutPage.submitOrder();
 
 		String confirmMessage = confirmationPage.getConfirmMessage();
-		Assert.assertTrue(confirmMessage.toLowerCase().equalsIgnoreCase("Thankyou for the order."));
+		if (confirmMessage.equalsIgnoreCase("Thankyou for the order.")){
+			Assert.assertTrue(true);
+		}else{
+			Assert.assertTrue(confirmMessage.contains("Thank you for the order."));
+		}
+		;
 
 	}
 

@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.time.Duration;
@@ -15,6 +17,27 @@ import java.time.Duration;
 public class BaseTest {
 
     public WebDriver driver;
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+    // TestNG method to initialize driver before each test
+    @BeforeMethod(alwaysRun = true)
+    @Parameters({"Browser"})
+    public void runBrowser(String Browser) throws IOException {
+        //driver = initilizeDriver();
+        // Browser Assignee
+        createDriver(Browser);
+        driver.get(Objects.requireNonNull(config.getProperty("url")));
+    }
+
+    @AfterMethod
+    public void closeBrowser(){
+        if (driver != null) {
+            driver.quit();
+            driver = null; // Set to null to avoid memory leaks
+        }
+    }
 
     public WebDriver initilizeDriver() {
 
@@ -28,20 +51,6 @@ public class BaseTest {
         return driver;
     }
 
-    // TestNG method to initialize driver before each test
-    @BeforeMethod(alwaysRun = true)
-    public void runBrowser() throws IOException {
-        driver = initilizeDriver();
-        driver.get(Objects.requireNonNull(config.getProperty("url")));
-    }
-
-    @AfterMethod
-    public void closeBrowser(){
-        if (driver != null) {
-            driver.quit();
-            driver = null; // Set to null to avoid memory leaks
-        }
-    }
 
     private void createDriver(String browserName) {
 
