@@ -9,6 +9,7 @@ import java.io.File;
 public class ExtentReportManager {
 
     private static ExtentReports extent;
+
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     public static ExtentReports createInstance() {
@@ -24,9 +25,7 @@ public class ExtentReportManager {
         sparkReporter.config().setTimelineEnabled(true);
 
         // Add filters
-        sparkReporter.filter().statusFilter()
-                .as(new Status[] { Status.FAIL, Status.PASS, Status.SKIP }) // You can modify this
-                ;
+        sparkReporter.filter().statusFilter().as(new Status[] { Status.FAIL, Status.PASS, Status.SKIP }); // You can modify this
 
         // Create ExtentReports object and attach the reporter
         extent = new ExtentReports();

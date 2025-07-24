@@ -13,8 +13,10 @@ public class StandAloneTest extends BaseTest {
 	CartPage cartPage ;
 	CheckOutPage checkoutPage;
 	ConfirmationPage confirmationPage;
+	String orderId ;
 
-	@Test
+
+	@Test(priority = 1)
 	public void standAloneTest() {
 
 		// Add null check for driver
@@ -44,8 +46,13 @@ public class StandAloneTest extends BaseTest {
 		}else{
 			Assert.assertTrue(confirmMessage.contains("Thank you for the order."));
 		}
-		;
+		orderId = confirmationPage.getOrderID();
 
+	}
+
+	@Test(priority = 2)
+	public void orderValidation(){
+		cartPage.orderMenuClicked();
 	}
 
 }

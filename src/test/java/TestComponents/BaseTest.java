@@ -24,7 +24,7 @@ public class BaseTest {
     // TestNG method to initialize driver before each test
     @BeforeMethod(alwaysRun = true)
     @Parameters({"Browser"})
-    public void runBrowser(String Browser) throws IOException {
+    public void setupBrowser(String Browser) throws IOException {
         //driver = initilizeDriver();
         // Browser Assignee
         createDriver(Browser);
@@ -39,19 +39,7 @@ public class BaseTest {
         }
     }
 
-    public WebDriver initilizeDriver() {
-
-        // Get browser from system property or properties file
-        String browserName = config.getProperty("browser");
-        if (browserName != null){
-            createDriver(browserName);
-        }else {
-            throw new RuntimeException("Please Pass The BrowserValue");
-        }
-        return driver;
-    }
-
-
+    // In This Function We Select The Browser Need To Select.
     private void createDriver(String browserName) {
 
         switch (browserName.toLowerCase()) {
@@ -75,6 +63,19 @@ public class BaseTest {
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+    }
+
+    // In This Function We Get The Browser Name From The Property Files And Run The Value
+    public WebDriver initilizeDriver() {
+
+        // Get browser from system property or properties file
+        String browserName = config.getProperty("browser");
+        if (browserName != null){
+            createDriver(browserName);
+        }else {
+            throw new RuntimeException("Please Pass The BrowserValue");
+        }
+        return driver;
     }
 
 }
