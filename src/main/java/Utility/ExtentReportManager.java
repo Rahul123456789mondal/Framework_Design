@@ -46,6 +46,7 @@ public class ExtentReportManager {
         return extent;
     }
 
+    // In This Method We Set The Test in Every New Thread Using ThreadLocal
     public static void setTest(ExtentTest test) {
         extentTest.set(test);
     }

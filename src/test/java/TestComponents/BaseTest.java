@@ -6,9 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -16,26 +14,48 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public WebDriver driver;
+    //public WebDriver driver;
+    protected WebDriver driver;
+    protected boolean isSessionBased = false; // Flag to determine if tests should share session
+
 
     public WebDriver getDriver() {
         return driver;
     }
-    // TestNG method to initialize driver before each test
+
+    // For session-based tests (login once, run multiple tests)
+    @BeforeClass(alwaysRun = true)
+    @Parameters({"Browser"})
+    public void setupSessionBrowser(String Browser) throws IOException {
+        if (isSessionBased) {
+            createDriver(Browser);
+            driver.get(Objects.requireNonNull(config.getProperty("url")));
+        }
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void closeSessionBrowser() {
+        if (isSessionBased && driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
+
+    // For individual test-based approach (each test gets fresh browser)
     @BeforeMethod(alwaysRun = true)
     @Parameters({"Browser"})
     public void setupBrowser(String Browser) throws IOException {
-        //driver = initilizeDriver();
-        // Browser Assignee
-        createDriver(Browser);
-        driver.get(Objects.requireNonNull(config.getProperty("url")));
+        if (!isSessionBased) {
+            createDriver(Browser);
+            driver.get(Objects.requireNonNull(config.getProperty("url")));
+        }
     }
 
-    @AfterMethod
-    public void closeBrowser(){
-        if (driver != null) {
+    @AfterMethod(alwaysRun = true)
+    public void closeBrowser() {
+        if (!isSessionBased && driver != null) {
             driver.quit();
-            driver = null; // Set to null to avoid memory leaks
+            driver = null;
         }
     }
 
