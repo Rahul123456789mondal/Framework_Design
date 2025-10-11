@@ -18,7 +18,6 @@ public class BaseTest {
     protected WebDriver driver;
     protected boolean isSessionBased = false; // Flag to determine if tests should share session
 
-
     public WebDriver getDriver() {
         return driver;
     }
@@ -30,12 +29,14 @@ public class BaseTest {
         if (isSessionBased) {
             createDriver(Browser);
             driver.get(Objects.requireNonNull(config.getProperty("url")));
+            System.out.println("✅ Session browser initialized successfully");
         }
     }
 
     @AfterClass(alwaysRun = true)
     public void closeSessionBrowser() {
         if (isSessionBased && driver != null) {
+            System.out.println("🔚 Closing session-based browser");
             driver.quit();
             driver = null;
         }
@@ -46,14 +47,18 @@ public class BaseTest {
     @Parameters({"Browser"})
     public void setupBrowser(String Browser) throws IOException {
         if (!isSessionBased) {
+            System.out.println("🔄 Setting up individual browser for test: " + Browser);
             createDriver(Browser);
             driver.get(Objects.requireNonNull(config.getProperty("url")));
+            System.out.println("✅ Individual browser initialized successfully");
+
         }
     }
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         if (!isSessionBased && driver != null) {
+            System.out.println("🔚 Closing individual browser after test");
             driver.quit();
             driver = null;
         }
