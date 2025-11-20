@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 import java.util.Objects;
 import java.time.Duration;
@@ -106,7 +105,7 @@ public class BaseTest {
 }
 
 // Load properties file
-    /*private void loadProperties() throws IOException {
+/*  private void loadProperties() throws IOException {
         prop = new Properties();
         FileInputStream file = null;
         try {

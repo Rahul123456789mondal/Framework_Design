@@ -17,6 +17,18 @@
         </classes>
     </test> <!-- Test -->
 
+    <test name="Order Validation Test">
+        <parameter name="Browser" value="Chrome"/>
+        <groups>
+            <run>
+                <include name="Order Validation Test"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Selenium_Framwork.framwork_design.OrderValidationTest"/>
+        </classes>
+    </test>
+
     <test name="Login Validation Tests">
         <parameter name="Browser" value="Chrome"/>
         <groups>
