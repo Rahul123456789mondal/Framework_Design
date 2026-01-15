@@ -2,9 +2,12 @@ package Selenium_Framwork.framwork_design;
 
 import PageObject.LandingPage;
 import TestComponents.BaseTest;
+import com.github.indrajitchakraborty.extent.ExtentListener;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(ExtentListener.class)
 public class ErrorValidationTest extends BaseTest {
 
     LandingPage landingPage ;

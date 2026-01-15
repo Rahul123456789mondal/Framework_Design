@@ -19,7 +19,7 @@ public class OrderValidationTest extends BaseTest {
         System.out.println("Running orderValidationTest with existing session");
 
         // Navigate to orders page and validate
-        cartPage.orderMenuClicked();
+        //cartPage.orderMenuClicked();
         // Add your order validation logic here
 
         System.out.println("Order validation completed");

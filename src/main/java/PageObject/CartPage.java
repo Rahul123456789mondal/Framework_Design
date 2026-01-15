@@ -1,7 +1,6 @@
 package PageObject;
 
 import AbstractComponents.AbstractComponent;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,14 +25,9 @@ public class CartPage {
     @FindBy(xpath = "//div[@class='cartSection']//h3")
     private WebElement verifyProductName;
 
-    By orderMenuClick = By.xpath("//button[@routerlink ='/dashboard/myorders']");
-    public void orderMenuClicked(){
-        driver.findElement(orderMenuClick).click();
-    }
-
 
     // Go to cart page
-    public CartPage goToCart() {
+    public void goToCart() {
         try {
             // Debug: Check if element is found
             if (cartButton == null) {
@@ -45,7 +39,6 @@ public class CartPage {
         } catch (Exception e) {
             System.out.println("Failed to navigate to cart: " + e.getMessage());
         }
-        return this;
     }
 
 

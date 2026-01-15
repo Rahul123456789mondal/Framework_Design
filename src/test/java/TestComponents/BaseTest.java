@@ -7,13 +7,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
-import java.io.IOException;
 import java.util.Objects;
 import java.time.Duration;
 
 public class BaseTest {
 
-    //public WebDriver driver;
     protected WebDriver driver;
     protected boolean isSessionBased = false; // Flag to determine if tests should share session
 
@@ -24,7 +22,7 @@ public class BaseTest {
     // For session-based tests (login once, run multiple tests)
     @BeforeClass(alwaysRun = true)
     @Parameters({"Browser"})
-    public void setupSessionBrowser(String Browser) throws IOException {
+    public void setupSessionBrowser(String Browser) {
         if (isSessionBased) {
             createDriver(Browser);
             driver.get(Objects.requireNonNull(config.getProperty("url")));
@@ -44,7 +42,7 @@ public class BaseTest {
     // For individual test-based approach (each test gets fresh browser)
     @BeforeMethod(alwaysRun = true)
     @Parameters({"Browser"})
-    public void setupBrowser(String Browser) throws IOException {
+    public void setupBrowser(String Browser) {
         if (!isSessionBased) {
             System.out.println("🔄 Setting up individual browser for test: " + Browser);
             createDriver(Browser);
@@ -89,19 +87,6 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    // In This Function We Get The Browser Name From The Property Files And Run The Value
-    public WebDriver initilizeDriver() {
-
-        // Get browser from system property or properties file
-        String browserName = config.getProperty("browser");
-        if (browserName != null){
-            createDriver(browserName);
-        }else {
-            throw new RuntimeException("Please Pass The BrowserValue");
-        }
-        return driver;
-    }
-
 }
 
 // Load properties file
@@ -126,3 +111,16 @@ public class BaseTest {
             }
         }
     } */
+
+// In This Function We Get The Browser Name From The Property Files And Run The Value
+/*public WebDriver initilizeDriver() {
+
+        // Get browser from system property or properties file
+        String browserName = config.getProperty("browser");
+        if (browserName != null){
+            createDriver(browserName);
+        }else {
+            throw new RuntimeException("Please Pass The BrowserValue");
+        }
+        return driver;
+    }*/

@@ -15,6 +15,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -39,6 +46,12 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
+        <dependency>
+            <groupId>com.github.indrajitchakraborty</groupId>
+            <artifactId>selenium-utils</artifactId>
+            <version>v0.0.2</version>
+        </dependency>
 
 		<!--
 		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->

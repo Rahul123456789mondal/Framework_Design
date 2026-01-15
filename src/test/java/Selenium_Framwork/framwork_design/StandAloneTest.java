@@ -37,9 +37,7 @@ public class StandAloneTest extends BaseTest {
 		System.out.println("Login completed successfully. Session will be maintained for all tests.");
 	}
 
-
-
-	@Test(priority = 1, groups = {"Session Tests"})
+	@Test(priority = 1, groups = {"Placed Order Tests"})
 	public void addProductToCartTest() {
 
 		// Add null check for driver
@@ -57,7 +55,7 @@ public class StandAloneTest extends BaseTest {
 
 	}
 
-	@Test(priority = 2, groups = {"Session Tests"}, dependsOnMethods = {"addProductToCartTest"})
+	@Test(priority = 2, groups = {"Placed Order Tests"}, dependsOnMethods = {"addProductToCartTest"})
 	public void checkoutTest() {
 		System.out.println("Running checkoutTest with existing session");
 
@@ -77,6 +75,17 @@ public class StandAloneTest extends BaseTest {
 		orderId = confirmationPage.getOrderID();
 		System.out.println("Order completed with ID: " + orderId);
 	}
+
+    @Test(groups = {"Order Validation Test"}, priority = 3, dependsOnMethods = {"checkoutTest"})
+    public void orderValidationTest() {
+        System.out.println("Running orderValidationTest with existing session");
+
+        // Navigate to orders page and validate
+        confirmationPage.orderMenuClicked();
+        // Add your order validation logic here
+
+        System.out.println("Order validation completed");
+    }
 
 }
 
