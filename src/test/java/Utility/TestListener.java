@@ -13,8 +13,7 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestStart(ITestResult result) {
-        ExtentTest test = ExtentReportManager.getExtent()
-                .createTest(result.getMethod().getMethodName());
+        ExtentTest test = ExtentReportManager.getExtent().createTest(result.getMethod().getMethodName());
         ExtentReportManager.setTest(test);
         ExtentReportManager.getTest().assignAuthor("Arka Mondal");
     }

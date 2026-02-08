@@ -13,70 +13,51 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected boolean isSessionBased = false; // Flag to determine if tests should share session
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    // For session-based tests (login once, run multiple tests)
+    /**
+     * Setup browser once before all tests in the class
+     * This runs BEFORE any @BeforeClass in child classes
+     */
     @BeforeClass(alwaysRun = true)
     @Parameters({"Browser"})
-    public void setupSessionBrowser(String Browser) {
-        if (isSessionBased) {
-            createDriver(Browser);
-            driver.get(Objects.requireNonNull(config.getProperty("url")));
-            System.out.println("✅ Session browser initialized successfully");
-        }
-    }
-
-    @AfterClass(alwaysRun = true)
-    public void closeSessionBrowser() {
-        if (isSessionBased && driver != null) {
-            System.out.println("🔚 Closing session-based browser");
-            driver.quit();
-            driver = null;
-        }
-    }
-
-    // For individual test-based approach (each test gets fresh browser)
-    @BeforeMethod(alwaysRun = true)
-    @Parameters({"Browser"})
     public void setupBrowser(String Browser) {
-        if (!isSessionBased) {
             System.out.println("🔄 Setting up individual browser for test: " + Browser);
             createDriver(Browser);
             driver.get(Objects.requireNonNull(config.getProperty("url")));
             System.out.println("✅ Individual browser initialized successfully");
 
-        }
     }
 
-    @AfterMethod(alwaysRun = true)
+    /**
+     * Close browser once after all tests complete
+     */
+    @AfterClass(alwaysRun = true)
     public void closeBrowser() {
-        if (!isSessionBased && driver != null) {
+        if (driver != null) {
             System.out.println("🔚 Closing individual browser after test");
             driver.quit();
             driver = null;
         }
     }
 
+
     // In This Function We Select The Browser Need To Select.
     private void createDriver(String browserName) {
 
         switch (browserName.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
 
             case "firefox":
-                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
 
             case "edge":
-                WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
 

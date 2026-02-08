@@ -12,11 +12,11 @@
         <listener class-name="com.github.indrajitchakraborty.extent.ExtentListener"/>
     </listeners>
 
-    <!-- <listeners>
+     <!--<listeners>
         <listener class-name="Utility.TestListener"/>
-    </listeners>  -->
-    <test name="Session Based Tests">
-        <parameter name="Browser" value="Chrome"/>
+    </listeners>-->
+    <test name="Normal Order Tests">
+        <parameter name="Browser" value="edge"/>
         <groups>
             <run>
                 <include name="Placed Order Tests"/>

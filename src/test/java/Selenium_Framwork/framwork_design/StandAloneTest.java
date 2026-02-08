@@ -3,10 +3,14 @@ package Selenium_Framwork.framwork_design;
 import PageObject.*;
 import TestComponents.BaseTest;
 import BaseConfig.config;
+import com.github.indrajitchakraborty.extent.ExtentListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+
+@Listeners(ExtentListener.class)
 public class StandAloneTest extends BaseTest {
 
 	LandingPage landingPage ;
@@ -16,37 +20,26 @@ public class StandAloneTest extends BaseTest {
 	ConfirmationPage confirmationPage;
 	String orderId ;
 
-	// Override the session flag
-	public StandAloneTest() {
-		this.isSessionBased = true;
-	}
-
-	@BeforeClass(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
 	public void performLogin() {
 		// Add null check for driver
 		if (driver == null) {
 			throw new RuntimeException("Driver is not initialized. Check BaseTest configuration.");
 		}
-
 		System.out.println("Performing one-time login with driver: " + driver);
-
 		// Perform login once for all tests in this class
 		landingPage = new LandingPage(driver);
 		productList = landingPage.login("arkatest@test.com", "Test@123");
-
 		System.out.println("Login completed successfully. Session will be maintained for all tests.");
 	}
 
 	@Test(priority = 1, groups = {"Placed Order Tests"})
 	public void addProductToCartTest() {
-
 		// Add null check for driver
 		if (driver == null) {
 			throw new RuntimeException("Driver is not initialized. Check BaseTest configuration.");
 		}
-
-		System.out.println("Running addProductToCartTest with existing session");
-
+		System.out.println("Running addProductToCartTest");
 		String product_name = "IPHONE 13 PRO";
 		cartPage = productList.addProductToCart(product_name);
 		cartPage.goToCart();
@@ -79,11 +72,9 @@ public class StandAloneTest extends BaseTest {
     @Test(groups = {"Order Validation Test"}, priority = 3, dependsOnMethods = {"checkoutTest"})
     public void orderValidationTest() {
         System.out.println("Running orderValidationTest with existing session");
-
         // Navigate to orders page and validate
         confirmationPage.orderMenuClicked();
         // Add your order validation logic here
-
         System.out.println("Order validation completed");
     }
 

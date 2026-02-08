@@ -12,7 +12,7 @@ public class ExtentReportManager {
 
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
-    public static ExtentReports createInstance() {
+    public static void createInstance() {
         // Define the report path
         String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
 
@@ -38,7 +38,6 @@ public class ExtentReportManager {
         extent.setSystemInfo("Tester", "Arka Mondal");
         extent.setSystemInfo("Framework", "Selenium TestNG");
 
-        return extent;
     }
 
     // Getters and Setters for ThreadLocal ExtentTest
