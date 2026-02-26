@@ -40,7 +40,7 @@
         </classes>
     </test>-->
 
-    <!--<test name="Login Validation Tests">
+    <test name="Login Validation Tests">
          <parameter name="Browser" value="Chrome"/>
          <groups>
              <run>
@@ -53,7 +53,7 @@
      </test>
 
     <test name="Login Validation Tests-new">
-        <parameter name="Browser" value="Firefox"/>
+        <parameter name="Browser" value="Chrome"/>
         <groups>
             <run>
                 <include name="Login Validation"/>
@@ -62,6 +62,6 @@
         <classes>
             <class name="Selenium_Framwork.framwork_design.ErrorValidationTest"/>
         </classes>
-    </test>-->
+    </test>
 
  </suite> <!-- Suite -->
