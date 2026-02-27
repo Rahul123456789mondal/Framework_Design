@@ -16,7 +16,8 @@ public class config {
         prop = new Properties();
         FileInputStream file = null;
         try {
-            String propertiesPath = System.getProperty("user.dir") + "\\src\\main\\java\\resourse\\globalData.properties";
+            String propertiesPath = System.getProperty("user.dir") + "/src/main/java/resourse/globalData.properties";
+            //String propertiesPath = System.getProperty("user.dir") + "\\src\\main\\java\\resourse\\globalData.properties";
             file = new FileInputStream(propertiesPath);
             prop.load(file);
             log.info("Properties file loaded successfully from: {}", propertiesPath);
