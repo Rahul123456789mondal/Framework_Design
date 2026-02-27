@@ -1,5 +1,6 @@
 BaseConfig\BaseClass.class
 PageObject\CheckOutPage.class
+Utility\ScreenshotUtil.class
 AbstractComponents\ReusableComponents.class
 AbstractComponents\AbstractComponent.class
 PageObject\CartPage.class
@@ -7,4 +8,5 @@ PageObject\LandingPage.class
 PageObject\ProductList.class
 Utility\ReadPropertiesFile.class
 PageObject\ConfirmationPage.class
+Utility\ExtentReportManager.class
 BaseConfig\config.class
