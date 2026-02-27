@@ -4,6 +4,7 @@ import BaseConfig.config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
@@ -50,7 +51,19 @@ public class BaseTest {
 
         switch (browserName.toLowerCase()) {
             case "chrome":
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+
+                // Check if the 'headless' system property is set to true
+                if (Boolean.parseBoolean(System.getProperty("headless"))) {
+                    System.out.println("🖥️ Running Chrome in Headless Mode");
+                    options.addArguments("--headless=new");
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--no-sandbox"); // Required for GitHub Actions
+                    options.addArguments("--disable-dev-shm-usage"); // Overcomes resource limits in CI
+                    options.addArguments("--window-size=1920,1080"); // Ensures elements are visible
+                }
+
+                driver = new ChromeDriver(options);;
                 break;
 
             case "firefox":
