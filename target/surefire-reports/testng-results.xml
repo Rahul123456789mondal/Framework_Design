@@ -2,7 +2,7 @@
 <testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-01T00:46:12 IST" name="E-Commerce Test Suite" finished-at="2026-03-01T00:46:30 IST" duration-ms="17554">
+  <suite started-at="2026-03-01T01:41:15 IST" name="E-Commerce Test Suite" finished-at="2026-03-01T01:41:30 IST" duration-ms="15415">
     <groups>
       <group name="Placed Order Tests">
         <method signature="StandAloneTest.addProductToCartTest()[pri:1, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" name="addProductToCartTest" class="Selenium_Framwork.framwork_design.StandAloneTest"/>
@@ -18,9 +18,9 @@
         <method signature="ErrorValidationTest.loginWithInvalidCredentials()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" name="loginWithInvalidCredentials" class="Selenium_Framwork.framwork_design.ErrorValidationTest"/>
       </group> <!-- Login Validation -->
     </groups>
-    <test started-at="2026-03-01T00:46:12 IST" name="Login Validation Tests-new" finished-at="2026-03-01T00:46:26 IST" duration-ms="14004">
+    <test started-at="2026-03-01T01:41:15 IST" name="Login Validation Tests-new" finished-at="2026-03-01T01:41:26 IST" duration-ms="10908">
       <class name="Selenium_Framwork.framwork_design.ErrorValidationTest">
-        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T00:46:12 IST" name="setupBrowser" finished-at="2026-03-01T00:46:23 IST" duration-ms="10116" status="PASS">
+        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T01:41:15 IST" name="setupBrowser" finished-at="2026-03-01T01:41:23 IST" duration-ms="7514" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -31,23 +31,23 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBrowser -->
-        <test-method signature="loginWithEmptyEmail()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T00:46:23 IST" name="loginWithEmptyEmail" finished-at="2026-03-01T00:46:23 IST" duration-ms="442" status="PASS">
+        <test-method signature="loginWithEmptyEmail()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T01:41:23 IST" name="loginWithEmptyEmail" finished-at="2026-03-01T01:41:23 IST" duration-ms="348" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginWithEmptyEmail -->
-        <test-method signature="loginWithInvalidCredentials()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T00:46:23 IST" name="loginWithInvalidCredentials" finished-at="2026-03-01T00:46:24 IST" duration-ms="1195" status="PASS">
+        <test-method signature="loginWithInvalidCredentials()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T01:41:23 IST" name="loginWithInvalidCredentials" finished-at="2026-03-01T01:41:24 IST" duration-ms="800" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginWithInvalidCredentials -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T00:46:24 IST" name="closeBrowser" finished-at="2026-03-01T00:46:26 IST" duration-ms="2206" status="PASS">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5158b42f]" started-at="2026-03-01T01:41:24 IST" name="closeBrowser" finished-at="2026-03-01T01:41:26 IST" duration-ms="2183" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
       </class> <!-- Selenium_Framwork.framwork_design.ErrorValidationTest -->
     </test> <!-- Login Validation Tests-new -->
-    <test started-at="2026-03-01T00:46:12 IST" name="Login Validation Tests" finished-at="2026-03-01T00:46:26 IST" duration-ms="14004">
+    <test started-at="2026-03-01T01:41:15 IST" name="Login Validation Tests" finished-at="2026-03-01T01:41:26 IST" duration-ms="11069">
       <class name="Selenium_Framwork.framwork_design.ErrorValidationTest">
-        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T00:46:12 IST" name="setupBrowser" finished-at="2026-03-01T00:46:22 IST" duration-ms="9272" status="PASS">
+        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T01:41:15 IST" name="setupBrowser" finished-at="2026-03-01T01:41:23 IST" duration-ms="8082" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -58,23 +58,23 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBrowser -->
-        <test-method signature="loginWithEmptyEmail()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T00:46:22 IST" name="loginWithEmptyEmail" finished-at="2026-03-01T00:46:25 IST" duration-ms="3061" status="PASS">
+        <test-method signature="loginWithEmptyEmail()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T01:41:23 IST" name="loginWithEmptyEmail" finished-at="2026-03-01T01:41:23 IST" duration-ms="326" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginWithEmptyEmail -->
-        <test-method signature="loginWithInvalidCredentials()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T00:46:25 IST" name="loginWithInvalidCredentials" finished-at="2026-03-01T00:46:25 IST" duration-ms="509" status="PASS">
+        <test-method signature="loginWithInvalidCredentials()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T01:41:24 IST" name="loginWithInvalidCredentials" finished-at="2026-03-01T01:41:25 IST" duration-ms="1223" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginWithInvalidCredentials -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T00:46:25 IST" name="closeBrowser" finished-at="2026-03-01T00:46:26 IST" duration-ms="1108" status="PASS">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.ErrorValidationTest@5c5eefef]" started-at="2026-03-01T01:41:25 IST" name="closeBrowser" finished-at="2026-03-01T01:41:26 IST" duration-ms="1412" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
       </class> <!-- Selenium_Framwork.framwork_design.ErrorValidationTest -->
     </test> <!-- Login Validation Tests -->
-    <test started-at="2026-03-01T00:46:12 IST" name="Normal Order Tests" finished-at="2026-03-01T00:46:30 IST" duration-ms="17554">
+    <test started-at="2026-03-01T01:41:15 IST" name="Normal Order Tests" finished-at="2026-03-01T01:41:30 IST" duration-ms="15415">
       <class name="Selenium_Framwork.framwork_design.StandAloneTest">
-        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:12 IST" name="setupBrowser" finished-at="2026-03-01T00:46:23 IST" duration-ms="10079" status="PASS">
+        <test-method is-config="true" signature="setupBrowser(java.lang.String)[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:15 IST" name="setupBrowser" finished-at="2026-03-01T01:41:24 IST" duration-ms="8466" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -85,23 +85,23 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupBrowser -->
-        <test-method is-config="true" signature="performLogin()[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:23 IST" name="performLogin" finished-at="2026-03-01T00:46:23 IST" duration-ms="626" status="PASS">
+        <test-method is-config="true" signature="performLogin()[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:24 IST" name="performLogin" finished-at="2026-03-01T01:41:24 IST" duration-ms="661" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- performLogin -->
-        <test-method signature="addProductToCartTest()[pri:1, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:23 IST" name="addProductToCartTest" finished-at="2026-03-01T00:46:28 IST" duration-ms="4389" status="PASS">
+        <test-method signature="addProductToCartTest()[pri:1, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:24 IST" name="addProductToCartTest" finished-at="2026-03-01T01:41:28 IST" duration-ms="3576" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addProductToCartTest -->
-        <test-method signature="checkoutTest()[pri:2, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:28 IST" name="checkoutTest" finished-at="2026-03-01T00:46:30 IST" depends-on-methods="Selenium_Framwork.framwork_design.StandAloneTest.addProductToCartTest" duration-ms="1985" status="PASS">
+        <test-method signature="checkoutTest()[pri:2, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:28 IST" name="checkoutTest" finished-at="2026-03-01T01:41:30 IST" depends-on-methods="Selenium_Framwork.framwork_design.StandAloneTest.addProductToCartTest" duration-ms="2393" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- checkoutTest -->
-        <test-method signature="orderValidationTest()[pri:3, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:30 IST" name="orderValidationTest" finished-at="2026-03-01T00:46:30 IST" depends-on-methods="Selenium_Framwork.framwork_design.StandAloneTest.checkoutTest" duration-ms="133" status="PASS">
+        <test-method signature="orderValidationTest()[pri:3, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:30 IST" name="orderValidationTest" finished-at="2026-03-01T01:41:30 IST" depends-on-methods="Selenium_Framwork.framwork_design.StandAloneTest.checkoutTest" duration-ms="64" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- orderValidationTest -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T00:46:30 IST" name="closeBrowser" finished-at="2026-03-01T00:46:30 IST" duration-ms="302" status="PASS">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:Selenium_Framwork.framwork_design.StandAloneTest@1afd44cb]" started-at="2026-03-01T01:41:30 IST" name="closeBrowser" finished-at="2026-03-01T01:41:30 IST" duration-ms="223" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->

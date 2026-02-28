@@ -4,11 +4,12 @@ pipeline {
 
        stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/tricity-selenium/m...
+                git branch: 'experiment',
+                    url: 'https://github.com/Rahul123456789mondal/Framework_Design.git'
             }
         }
-        stage('Run Tests') {
+
+       stage('Run Tests') {
             steps {
                 bat 'mvn clean test'
             }
