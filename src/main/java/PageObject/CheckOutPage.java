@@ -34,6 +34,40 @@ public class CheckOutPage {
 
         try {
             WebElement clickOnCountry = driver.findElement(countryInput);
+
+            // Scroll to center
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", clickOnCountry);
+            Thread.sleep(500); // Give the UI a half-second to settle
+
+            // Use JS click to bypass interception
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clickOnCountry);
+            clickOnCountry.clear();
+            clickOnCountry.sendKeys(countryName);
+
+            // Wait for the dropdown options to appear
+            By dropdownOptions = By.xpath("//button[contains(@class,'ta-item')]");
+            AbstractComponent.waitForElementToAppear(dropdownOptions, driver);
+
+            List<WebElement> countryList = driver.findElements(dropdownOptions);
+            System.out.println("Available countries: " + countryList.size());
+
+            for (WebElement country : countryList) {
+                String countryText = country.getText().trim();
+                if (countryText.equalsIgnoreCase(countryName)) {
+                    // Use JS click for the dropdown option
+                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", country);
+                    System.out.println("Selected country: " + countryText);
+                    break; // Exit the loop once we find and click our country
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error selecting country: " + e.getMessage());
+            // Throw exception to stop the test immediately if this fails!
+            throw new RuntimeException("Failed to select country", e);
+        }
+
+        /*try {
+            WebElement clickOnCountry = driver.findElement(countryInput);
             // Scroll to country input first
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", clickOnCountry);
 
@@ -58,14 +92,30 @@ public class CheckOutPage {
         } catch (Exception e) {
             System.out.println("Error selecting country: " + e.getMessage());
             e.fillInStackTrace();
-        }
+        }*/
 
     }
 
     // Method to submit the order with multiple click strategies
     public ConfirmationPage submitOrder() {
-        WebElement submitButton = driver.findElement(submitBtn);
+        //WebElement submitButton = driver.findElement(submitBtn);
         try {
+            WebElement submitButton = driver.findElement(submitBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
+            Thread.sleep(1000);
+
+            AbstractComponent.waitForElementToBeClickable(submitButton, driver);
+
+            // Force click with JS
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+            return new ConfirmationPage(driver);
+        } catch (Exception e) {
+            System.out.println("Error submitting order: " + e.getMessage());
+            throw new RuntimeException("Failed to submit order", e);
+        }
+
+      /*  try {
             // Scroll to submit button - arguments[0].scrollIntoView({block: 'center'});
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
 
@@ -79,7 +129,7 @@ public class CheckOutPage {
             System.out.println("Error submitting order: " + e.getMessage());
             e.fillInStackTrace();
             throw new RuntimeException("Failed to submit order", e);
-        }
+        }*/
     }
 
 

@@ -25,6 +25,8 @@ public class ConfirmationPage {
     By orderID = By.xpath("//label[contains(@class, 'ng-star-inserted')]");
 
     public String getConfirmMessage() {
+        // Wait for the confirmation header to appear before grabbing it
+        AbstractComponent.waitForElementToAppear(confirmMessage, driver);
         WebElement confirmElement = driver.findElement(confirmMessage);
         return confirmElement.getText();
     }
