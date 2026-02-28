@@ -4,73 +4,87 @@ import BaseConfig.config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import java.io.IOException;
+import org.testng.annotations.*;
 import java.util.Objects;
 import java.time.Duration;
+
 public class BaseTest {
 
-    public WebDriver driver;
+    protected WebDriver driver;
 
-    public WebDriver initilizeDriver() {
-
-        // Get browser from system property or properties file
-        String browserName = config.getProperty("browser");
-        if (browserName !=  null){
-            createDriver(browserName);
-        }else {
-            throw new RuntimeException("Please Pass The BrowserValue");
-        }
+    public WebDriver getDriver() {
         return driver;
     }
 
-    // TestNG method to initialize driver before each test
-    @BeforeMethod(alwaysRun = true)
-    public void runBrowser() throws IOException {
-        driver = initilizeDriver();
-        driver.get(Objects.requireNonNull(config.getProperty("url")));
+    /**
+     * Setup browser once before all tests in the class
+     * This runs BEFORE any @BeforeClass in child classes
+     */
+    @BeforeClass(alwaysRun = true)
+    @Parameters({"Browser"})
+    public void setupBrowser(String Browser) {
+            System.out.println("🔄 Setting up individual browser for test: " + Browser);
+            createDriver(Browser);
+            driver.get(Objects.requireNonNull(config.getProperty("url")));
+            System.out.println("✅ Individual browser initialized successfully");
+
     }
 
-    @AfterMethod
-    public void closeBrowser(){
+    /**
+     * Close browser once after all tests complete
+     */
+    @AfterClass(alwaysRun = true)
+    public void closeBrowser() {
         if (driver != null) {
+            System.out.println("🔚 Closing individual browser after test");
             driver.quit();
-            driver = null; // Set to null to avoid memory leaks
+            driver = null;
         }
     }
 
+
+    // In This Function We Select The Browser Need To Select.
     private void createDriver(String browserName) {
 
-        switch (browserName) {
+        switch (browserName.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+
+                // Check if the 'headless' system property is set to true
+                if (Boolean.parseBoolean(System.getProperty("headless"))) {
+                    System.out.println("🖥️ Running Chrome in Headless Mode");
+                    options.addArguments("--headless=new");
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--no-sandbox"); // Required for GitHub Actions
+                    options.addArguments("--disable-dev-shm-usage"); // Overcomes resource limits in CI
+                    options.addArguments("--window-size=1920,1080"); // Ensures elements are visible
+                }
+
+                driver = new ChromeDriver(options);;
                 break;
 
             case "firefox":
-                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
 
             case "edge":
-                WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
 
             default:
                 throw new RuntimeException("Browser not supported: " + browserName);
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
 }
 
 // Load properties file
-    /*private void loadProperties() throws IOException {
+/*  private void loadProperties() throws IOException {
         prop = new Properties();
         FileInputStream file = null;
         try {
@@ -91,3 +105,16 @@ public class BaseTest {
             }
         }
     } */
+
+// In This Function We Get The Browser Name From The Property Files And Run The Value
+/*public WebDriver initilizeDriver() {
+
+        // Get browser from system property or properties file
+        String browserName = config.getProperty("browser");
+        if (browserName != null){
+            createDriver(browserName);
+        }else {
+            throw new RuntimeException("Please Pass The BrowserValue");
+        }
+        return driver;
+    }*/

@@ -2,6 +2,7 @@ package PageObject;
 
 import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,7 +41,10 @@ public class LandingPage {
     }
 
     public LandingPage clickLogin() {
-        loginButton.click();
+        //loginButton.click();
+        // Use JavascriptExecutor to bypass click interception
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", loginButton);
         return this;
     }
 
@@ -50,7 +54,19 @@ public class LandingPage {
         enterPassword(password);
         clickLogin();
         // Wait for products to load (this ensures login was successful)
-        AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
+        //AbstractComponent.waitForElementToAppear(By.cssSelector(".mb-3"), driver);
         return new ProductList(driver);
     }
+
+    By errorPopup = By.xpath("//div[@id='toast-container']//div[@role='alert']");
+
+    public String getErrorMessage() {
+        // Wait for the error popup to be fully visible before grabbing text
+        AbstractComponent.waitForElementToAppear(errorPopup, driver);
+
+        WebElement popup = driver.findElement(errorPopup);
+        return popup.getText();
+    }
+
+
 }

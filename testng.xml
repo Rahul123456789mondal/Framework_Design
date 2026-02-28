@@ -1,11 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="E-Commerce Test Suite" parallel="tests">
 
-    <test name="Test">
+    <parameter name="reportName" value="MyDynamicReport"/>
+    <parameter name="reportTitle" value="Login Module Automation Report"/>
+    <parameter name="Browser" value="Chrome"/>
+    <parameter name="Env" value="QA"/>
+    <parameter name="OS" value="Windows 11"/>
+
+    <listeners>
+        <listener class-name="com.github.indrajitchakraborty.extent.ExtentListener"/>
+    </listeners>
+
+     <!--<listeners>
+        <listener class-name="Utility.TestListener"/>
+    </listeners>-->
+    <test name="Normal Order Tests">
+        <parameter name="Browser" value="Chrome"/>
+        <groups>
+            <run>
+                <include name="Placed Order Tests"/>
+                <include name="Order Validation Test"/>
+            </run>
+        </groups>
         <classes>
             <class name="Selenium_Framwork.framwork_design.StandAloneTest"/>
         </classes>
-    </test> <!-- Test -->
+    </test>
 
-</suite> <!-- Suite -->
+    <!--<test name="Order Validation Test">
+        <parameter name="Browser" value="Chrome"/>
+        <groups>
+            <run>
+                <include name="Order Validation Test"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Selenium_Framwork.framwork_design.OrderValidationTest"/>
+        </classes>
+    </test>-->
+
+    <test name="Login Validation Tests">
+         <parameter name="Browser" value="Chrome"/>
+         <groups>
+             <run>
+                 <include name="Login Validation"/>
+             </run>
+         </groups>
+         <classes>
+             <class name="Selenium_Framwork.framwork_design.ErrorValidationTest"/>
+         </classes>
+     </test>
+
+    <test name="Login Validation Tests-new">
+        <parameter name="Browser" value="Chrome"/>
+        <groups>
+            <run>
+                <include name="Login Validation"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Selenium_Framwork.framwork_design.ErrorValidationTest"/>
+        </classes>
+    </test>
+
+ </suite> <!-- Suite -->

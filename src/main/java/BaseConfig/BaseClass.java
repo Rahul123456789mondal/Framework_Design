@@ -19,13 +19,13 @@ public class BaseClass {
 
         switch (browser.toLowerCase()){
 
-            case "Chrome" :
+            case "chrome" :
                 driver = new ChromeDriver();
                 driver.manage().window().maximize();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
                 break;
 
-            case "Firefox" :
+            case "firefox" :
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

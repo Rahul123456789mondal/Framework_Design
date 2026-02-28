@@ -1,0 +1,174 @@
+    public CheckOutPage selectCountry(String countryName){
+        countryInput.click();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(countryName);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        countryInput.sendKeys(Keys.ENTER);
+        Actions action = new Actions(driver);
+        action.contextClick().build().perform();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", submitBtn);
+        return this;
+    }
+
+    // Method to submit the order
+    public CheckOutPage submitOrder() {
+        AbstractComponent.waitForElementToBeClickable(submitBtn, driver);
+        submitBtn.click();
+        return this;
+    }
+
+        public void selectCountry(String countryName) {
+
+            try {
+                // Scroll to country input first
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", countryInput);
+
+                // Clear and enter country name
+                WebElement clickOnCountry = driver.findElement(countryInput);
+                clickOnCountry.click();
+                clickOnCountry.clear();
+                clickOnCountry.sendKeys(countryName);
+
+                List<WebElement> countryList = driver.findElements(By.xpath("//button[contains(@class,'ta-item')]"));
+                System.out.println("Available countries: " + countryList.size());
+
+                for (WebElement country : countryList) {
+                    String countryText = country.getText().trim();
+                    System.out.println("Country option: " + countryText);
+
+                    if (countryText.equalsIgnoreCase(countryName)) {
+                        // Wait for element to be clickable
+                        AbstractComponent.waitForElementToBeClickable(country, driver);
+                        Actions action = new Actions(driver);
+                        action.contextClick().build().perform();
+                        try {
+                            Thread.sleep(2000);
+                        }catch (Exception e){
+                            e.fillInStackTrace();
+                        }
+                        JavascriptExecutor js = (JavascriptExecutor) driver;
+                        js.executeScript("arguments[0].scrollIntoView(true);", submitBtn);
+                        // Click the option
+                        country.click();
+                        System.out.println("Selected country: " + countryText);
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error selecting country: " + e.getMessage());
+                e.fillInStackTrace();
+            }
+
+        }
+
+        // Method to submit the order with multiple click strategies
+        public ConfirmationPage submitOrder() {
+            try {
+                // Scroll to submit button
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", submitBtn);
+
+                // Add delay for page stability
+                Thread.sleep(1000);
+                AbstractComponent.waitForElementToBeClickable((WebElement) submitBtn, driver);
+                driver.findElement(submitBtn).click();
+                return new ConfirmationPage(driver);
+            }
+             catch (Exception e) {
+                System.out.println("Error submitting order: " + e.getMessage());
+                e.fillInStackTrace();
+                throw new RuntimeException("Failed to submit order", e);
+            }
+        }
+
+
+    public CheckOutPage selectCountry(String countryName){
+
+        WebElement country= driver.findElement(countryInput);
+        country.click();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        country.sendKeys(countryName);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        country.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        country.sendKeys(Keys.ARROW_DOWN);
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        country.sendKeys(Keys.ENTER);
+        Actions action = new Actions(driver);
+        action.contextClick().build().perform();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        WebElement submitButton = driver.findElement(submitBtn);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        return this;
+    }
+
+    // Method to submit the order
+    public ConfirmationPage submitOrder() {
+
+        WebElement submitButton = driver.findElement(submitBtn);
+        // Wait for element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        submitButton.click();
+        return new ConfirmationPage(driver);
+    }
+
+     // Wait for element to be clickable
+                        AbstractComponent.waitForElementToBeClickable(country, driver);
+                        Actions action = new Actions(driver);
+                        action.contextClick().build().perform();
+                        try {
+                            Thread.sleep(2000);
+                        }catch (Exception e){
+                            e.fillInStackTrace();
+                        }

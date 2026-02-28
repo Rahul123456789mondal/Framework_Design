@@ -1,6 +1,7 @@
 package PageObject;
 
 import AbstractComponents.AbstractComponent;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,21 +27,20 @@ public class CartPage {
     private WebElement verifyProductName;
 
 
-
     // Go to cart page
-    public CartPage goToCart() {
+    public void goToCart() {
         try {
-            // Debug: Check if element is found
             if (cartButton == null) {
                 System.out.println("CartButton is null - PageFactory not initialized");
-            }else {
-                cartButton.click();
+            } else {
+                // Replaced standard click with JavaScript click to bypass interception
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].click();", cartButton);
             }
 
         } catch (Exception e) {
             System.out.println("Failed to navigate to cart: " + e.getMessage());
         }
-        return this;
     }
 
 
@@ -52,13 +52,20 @@ public class CartPage {
     public CheckOutPage proceedToCheckout() {
         try {
             AbstractComponent.waitForElementToBeClickable(checkoutButton, driver);
-            checkoutButton.click();
-            //((JavascriptExecutor) driver).executeScript("button click()", checkoutButton);
+
+            // Use JavaScript executor to bypass the click interception
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", checkoutButton);
+
         } catch (Exception e) {
             System.out.println("Failed to click checkout: " + e.getMessage());
+            // Throw an exception so the test fails immediately if the transition fails
+            throw new RuntimeException("Could not click the checkout button", e);
         }
 
         return new CheckOutPage(driver);
     }
+
+
 
 }

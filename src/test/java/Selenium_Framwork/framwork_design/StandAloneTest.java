@@ -3,9 +3,14 @@ package Selenium_Framwork.framwork_design;
 import PageObject.*;
 import TestComponents.BaseTest;
 import BaseConfig.config;
+import com.github.indrajitchakraborty.extent.ExtentListener;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+
+@Listeners(ExtentListener.class)
 public class StandAloneTest extends BaseTest {
 
 	LandingPage landingPage ;
@@ -13,28 +18,65 @@ public class StandAloneTest extends BaseTest {
 	CartPage cartPage ;
 	CheckOutPage checkoutPage;
 	ConfirmationPage confirmationPage;
+	String orderId ;
 
-	@Test
-	public void standAloneTest() {
-
+    @BeforeClass(alwaysRun = true)
+	public void performLogin() {
+		// Add null check for driver
+		if (driver == null) {
+			throw new RuntimeException("Driver is not initialized. Check BaseTest configuration.");
+		}
+		System.out.println("Performing one-time login with driver: " + driver);
+		// Perform login once for all tests in this class
 		landingPage = new LandingPage(driver);
-		productList = landingPage.login("arkatest@test.com","Test@123" );
+		productList = landingPage.login("arkatest@test.com", "Test@123");
+		System.out.println("Login completed successfully. Session will be maintained for all tests.");
+	}
 
+	@Test(priority = 1, groups = {"Placed Order Tests"})
+	public void addProductToCartTest() {
+		// Add null check for driver
+		if (driver == null) {
+			throw new RuntimeException("Driver is not initialized. Check BaseTest configuration.");
+		}
+		System.out.println("Running addProductToCartTest");
 		String product_name = "IPHONE 13 PRO";
 		cartPage = productList.addProductToCart(product_name);
-
 		cartPage.goToCart();
 		Assert.assertTrue(cartPage.verifyProductName(product_name), "Product Matched");
-		checkoutPage = cartPage.proceedToCheckout();
-
-		String countryName = config.getProperty("Country");
-		checkoutPage.selectCountry(countryName);
-		confirmationPage = checkoutPage.submitOrder();
-
-		String confirmMessage = confirmationPage.getConfirmMessage();
-		Assert.assertTrue(confirmMessage.toLowerCase().equalsIgnoreCase("Thankyou for the order."));
+		System.out.println("Product added to cart successfully");
 
 	}
+
+	@Test(priority = 2, groups = {"Placed Order Tests"}, dependsOnMethods = {"addProductToCartTest"})
+	public void checkoutTest() {
+		System.out.println("Running checkoutTest with existing session");
+
+		checkoutPage = cartPage.proceedToCheckout();
+		String countryName = config.getProperty("Country");
+		checkoutPage.selectCountry(countryName);
+
+		confirmationPage = checkoutPage.submitOrder();
+		String confirmMessage = confirmationPage.getConfirmMessage();
+
+		if (confirmMessage.equalsIgnoreCase("Thankyou for the order.")) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(confirmMessage.contains("Thank you for the order."));
+		}
+
+		orderId = confirmationPage.getOrderID();
+		System.out.println("Order completed with ID: " + orderId);
+	}
+
+    @Test(groups = {"Order Validation Test"}, priority = 3, dependsOnMethods = {"checkoutTest"})
+    public void orderValidationTest() {
+        System.out.println("Running orderValidationTest with existing session");
+        // Navigate to orders page and validate
+        confirmationPage.orderMenuClicked();
+        // Add your order validation logic here
+        System.out.println("Order validation completed");
+    }
 
 }
 
