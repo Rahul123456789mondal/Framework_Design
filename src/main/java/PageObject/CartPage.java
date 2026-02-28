@@ -52,10 +52,15 @@ public class CartPage {
     public CheckOutPage proceedToCheckout() {
         try {
             AbstractComponent.waitForElementToBeClickable(checkoutButton, driver);
-            checkoutButton.click();
-            //((JavascriptExecutor) driver).executeScript("button click()", checkoutButton);
+
+            // Use JavaScript executor to bypass the click interception
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", checkoutButton);
+
         } catch (Exception e) {
             System.out.println("Failed to click checkout: " + e.getMessage());
+            // Throw an exception so the test fails immediately if the transition fails
+            throw new RuntimeException("Could not click the checkout button", e);
         }
 
         return new CheckOutPage(driver);
