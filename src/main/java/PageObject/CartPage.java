@@ -1,6 +1,7 @@
 package PageObject;
 
 import AbstractComponents.AbstractComponent;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,11 +30,12 @@ public class CartPage {
     // Go to cart page
     public void goToCart() {
         try {
-            // Debug: Check if element is found
             if (cartButton == null) {
                 System.out.println("CartButton is null - PageFactory not initialized");
-            }else {
-                cartButton.click();
+            } else {
+                // Replaced standard click with JavaScript click to bypass interception
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].click();", cartButton);
             }
 
         } catch (Exception e) {

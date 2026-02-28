@@ -59,7 +59,11 @@ public class LandingPage {
     }
 
     By errorPopup = By.xpath("//div[@id='toast-container']//div[@role='alert']");
-    public String getErrorMessage(){
+
+    public String getErrorMessage() {
+        // Wait for the error popup to be fully visible before grabbing text
+        AbstractComponent.waitForElementToAppear(errorPopup, driver);
+
         WebElement popup = driver.findElement(errorPopup);
         return popup.getText();
     }
