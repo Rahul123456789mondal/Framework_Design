@@ -2,6 +2,7 @@ package PageObject;
 
 import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,7 +41,10 @@ public class LandingPage {
     }
 
     public LandingPage clickLogin() {
-        loginButton.click();
+        //loginButton.click();
+        // Use JavascriptExecutor to bypass click interception
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", loginButton);
         return this;
     }
 
