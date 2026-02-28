@@ -45,7 +45,9 @@ public class ConfirmationPage {
                         By.xpath("//button[contains(@routerlink,'myorders')]")
                 )
         );
-        ordersBtn.click();
+        // Force the click using JavaScript to bypass interception!
+        js.executeScript("arguments[0].click();", ordersBtn);
+        //ordersBtn.click();
 
     }
 
